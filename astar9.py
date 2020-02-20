@@ -210,8 +210,42 @@ class Wall():
 	def drawWall(self):
 		pygame.draw.rect(win, (255,255,255), (self.x, self.y, 25, 25))
 
-end = Node(250, 250,0,0)
-start = Node(25, 25, 0, end)
+def onsubmit():
+	global start
+	global End
+	st = startBox.get().split(',')
+	ed = endBox.get().split(',')
+	start.x = int(st[0])
+	start.y = int(st[1])
+	end.x = int(ed[0])
+	end.y = int(ed[1])
+	window.quit()
+	window.destroy()
+
+end = Node(0, 0,0,0)
+start = Node(0, 0, 0, end)
+
+window = tk.Tk()
+window.title('Enter')
+label = tk.Label(window, text='Start(x,y): ')
+startBox = tk.Entry(window)
+label1 = tk.Label(window, text='End(x,y): ')
+endBox = tk.Entry(window)
+
+submit = tk.Button(window, text='Submit', command=onsubmit)
+
+submit.grid(columnspan=2, row=3)
+label1.grid(row=1, pady=3)
+endBox.grid(row=1, column=1, pady=3)
+startBox.grid(row=0, column=1, pady=3)
+label.grid(row=0, pady=3)
+
+
+window.update()
+tk.mainloop()
+
+
+
 Open = []
 Closed = []
 walls = []
@@ -240,6 +274,11 @@ def getMin():
 				minn = i
 	return minn
 
+
+root = tk.Tk()
+root.attributes("-topmost", True)
+root.withdraw()
+messagebox.showinfo('Attention', 'Make obstuctions using mouse and press space to start') 
 
 run = True
 
